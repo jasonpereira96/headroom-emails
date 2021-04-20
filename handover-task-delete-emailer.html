@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load i18n %}{% autoescape off %}
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Headroom Email</title>
+  </head>
+
+
+  <body style="margin: 0; padding: 0; background-color: #f6f9fc;">
+    <table
+      style="
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        border-spacing: 0;
+        font-family: sans-serif;
+        color: #09374b;
+        border: 1px solid #dcebf4;
+      "
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+    >
+      <tbody style="box-shadow: 0px 1px 1px #dcebf4; background-color: white;">
+        <tr>
+          <td width="40" style="padding: 0 0 50px 0">
+            <p style="border-bottom: 2px solid #f6f9fc; padding: 0">
+              <img
+                src="https://headroom-media-bucket-production.s3.eu-central-1.amazonaws.com/emailers/Logo_Headroom-01_Transparant.png"
+                alt=""
+              />
+            </p>
+              {% if handover_to.avatar %}
+                <div
+                  style="
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 50%;
+                    margin-left: 32px;
+                    position: relative;
+                  ">
+                  <img
+                    src="{{handover_to.avatar.url}}"
+                    style="
+                      object-fit: cover;
+                      width: inherit;
+                      height: inherit;
+                      border-radius: inherit;
+                    "
+                    alt=""
+                  />
+                </div>
+              {% else %}
+                <table style="margin-left: 24px">
+                  <tr>
+                    <td
+                      style="
+                        background: #074f89;
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 50%;
+                        margin-left: 32px;
+                      "
+                    >
+                      <span style="color: #ffffff; font-size: 14px; padding-left: 30%">
+                        {{handover_to.first_name.0|upper}}{{handover_to.last_name.0|upper}}
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              {% endif %}
+
+            <p
+              style="
+                font-size: 16px;
+                padding-left: 32px;
+                color: rgba(9, 55, 75, 0.5);
+              "
+            >
+              Dear
+              <span style="color: #09374b; font-weight: 700; font-size: 16px"              
+                >
+                {% if handover_to.first_name %}
+                  {{handover_to.fullname|title}},
+                {% else %}
+                  {{handover_to.email}},
+                {% endif %}
+              </span>
+            </p>
+            
+            <p style="font-size: 16px; opacity: 0.5; padding-left: 32px">
+              Handover request for <b>{{handover_task|title}}</b> has been deleted by <b>{{handover_from.fullname|title}}</b>.
+            </p>
+
+          </td>
+        </tr>
+        <tr style="background-color: #ecf2f7">
+          <td style="padding-left: 32px; padding-bottom: 0px">
+            <p style="font-size: 13px; opacity: 0.5; margin: 0px; padding-top: 24px;">
+              Headroom,
+            </p>
+            <p style="font-size: 13px; opacity: 0.5; margin: 0px;">Herengracht 270
+            <span style="float: right; padding-right: 24px; text-decoration: underline; display: none;"><a href="https://www.google.com" style="color:#fd5c63">Unsubscribe</a></span></p>
+            <p style="font-size: 13px; opacity: 0.5; margin: 0px; padding-bottom: 24px;">1016 BW Amsterdam</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+{% endautoescape %}
+</html>
